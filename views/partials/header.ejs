@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-cart</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- Latest compiled and minified CSS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="/stylesheets/bootstrap.min.css">
+    <link rel="stylesheet" href="/stylesheets/main.css">
+    <link rel="stylesheet" href="/stylesheets/Footer-Dark.css">
+    <!-- Optional theme -->
+
+    <!-- Latest compiled and minified JavaScript -->
+
+    <script src="/stylesheets/js/bootstrap.min.js"></script>
+
+
+</head>
+<nav class="navbar navbar-light navbar-expand-md" style="background-color: #2f9acc;">
+    <div class="container-fluid">
+        <img src="/img/brand.png" width="5%" height="5%" style="width: 41px;"><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse d-lg-flex justify-content-lg-end" id="navcol-1">
+            <ul class="nav navbar-nav">
+
+                <% if(!currentUser){ %>
+                    <li class="nav-item" role="presentation"><a class="nav-link" style="color: #fff" href="/login">Login</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" style="color: #fff" href="/register">Signup</a></li>
+                    <%}else{ %>
+                        <li class="nav-" role="presentation"><a class="nav-link" style="color: #fff" href="#">Signed in as  <%= currentUser.username %></a></li>
+                        <% if(currentUser && currentUser.ismanufacture == 1){%>
+                            <li class="nav-item" role="presentation">
+                                <a class="nav-link" style="color: #fff;" href="#">
+                                    <span style="font-weight: bold;">
+                                    (Manufacture)
+                                   </span>
+                                </a>
+                            </li>
+                            <%}%>
+                                <% if(currentUser && currentUser.isdboy == 1){%>
+                                    <li class="nav-item" role="presentation"><a class="nav-link" style="color: #fff" href="/deliverystatus">Delivery Portal</a></li>
+                                    <%} %>
+
+                                        <li class="nav-item" role="presentation"><a class="nav-link" style="color: #fff" href="/profile">MyOrders</a></li>
+                                        <% }%>
+                                            <li class="nav-item" role="presentation"><a class="nav-link" style="color: #fff" href="/logout">Logout</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<body>

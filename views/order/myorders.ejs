@@ -1,0 +1,145 @@
+<%- include('../partials/header'); %>
+
+    <div class="container">
+
+
+        <header class.<div class="jumbotron">
+            <h1 class="display-3">E-cart</h1>
+            <p>
+                Welcome
+                <%= currentUser.username %>
+            </p>
+            <!-- <p class="lead">
+                <a class="btn btn-primary btn-lg" href="../campgrounds/new" role="button">Add new Component</a>
+            </p> -->
+        </header>
+        <h2>My Orders</h2>
+
+        <section>
+            <div>
+                <div class="row" style="margin: 0px;margin-left: 0px;">
+                    <% showfromit.forEach(function (valueToCallTheArrayElement){ %>
+
+                        <% if(currentUser && valueToCallTheArrayElement.author.id.equals(currentUser._id)|| currentUser && valueToCallTheArrayElement.product[0].author.username == currentUser.username){%>
+                            <div class="col-xl-4" style="margin: 5px;padding: 0px;margin-left: 0px;margin-right: 0px;margin-top: 10px;">
+                                <div class="border rounded shadow-lg">
+                                    <div>
+                                        <div>
+                                            <h1 class="d-xl-flex justify-content-xl-center align-items-xl-center" style="padding-left: 0px;">Customer Details</h1>
+                                        </div>
+                                    </div>
+                                    <div style="padding-left: 10px;">
+                                        <div>
+                                            <p>Name:
+                                                <%=valueToCallTheArrayElement.firstname%>
+                                                    <%=valueToCallTheArrayElement.lastname%>
+                                            </p>
+                                        </div>
+                                        <div>
+                                            <p>Address:
+                                                <%=valueToCallTheArrayElement.address%>
+
+                                            </p>
+                                        </div>
+                                        <div>
+                                            <p>Landmark:
+                                                <%=valueToCallTheArrayElement.landmark%>
+                                            </p>
+                                        </div>
+                                        <div>
+                                            <p>
+                                                Phone No.
+                                                <%=valueToCallTheArrayElement.phonenumber%>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div>
+                                            <h1 class="d-xl-flex justify-content-xl-center align-items-xl-center" style="padding-left: 0px;">Order Details</h1>
+                                        </div>
+                                    </div>
+                                    <div style="padding-left: 0px;">
+                                        <div style="height: 280px;" class="d-flex justify-content-center align-items-center"><img src="<%=valueToCallTheArrayElement.product[0].image%>" width="40%"></div>
+                                        <div style="padding-left: 10px;">
+                                            <div>
+                                                <p>
+                                                    Name of Product:
+                                                    <%=valueToCallTheArrayElement.product[0].name%>
+                                                </p>
+                                            </div>
+                                            <div>
+                                                <p>
+                                                    Product ID:
+                                                    <%=valueToCallTheArrayElement.product[0]._id%>
+                                                </p>
+                                            </div>
+                                            <div>
+                                                <p>
+                                                    Rs.
+                                                    <%=valueToCallTheArrayElement.product[0].price%>
+                                                </p>
+                                            </div>
+                                            <div>
+                                                <p>
+                                                    Shop Name:
+                                                    <%=valueToCallTheArrayElement.product[0].shopname%>
+                                                </p>
+                                            </div>
+                                            <div>
+                                                <p>
+                                                    Phone Number:
+                                                    <%=valueToCallTheArrayElement.product[0].phonenumber%>
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div style="padding: 10px;">
+                                            <div class="border rounded border-danger">
+
+                                                <div class="d-flex d-xl-flex justify-content-center justify-content-xl-center align-items-xl-center">
+                                                    <h1>
+                                                        Delivery Status
+                                                    </h1>
+                                                </div>
+                                                <div class="d-flex d-xl-flex justify-content-center align-items-center justify-content-xl-center align-items-xl-center">
+                                                    <%if (valueToCallTheArrayElement.isoutofdelivery == 1 && !valueToCallTheArrayElement.isdelivered == 1){%>
+                                                        <h5 style="background-color: rgb(73, 175, 60);padding: .5em;color: white;">
+                                                            Your Item has been dispatched
+                                                        </h5>
+                                                        <%}else if(valueToCallTheArrayElement.isdelivered == 1){%>
+                                                            <h5 style="background-color: rgb(73, 175, 60);padding: .5em;color: white;">
+                                                                Your Item has been Delevered
+                                                            </h5>
+                                                            <%  }else if (valueToCallTheArrayElement.isrejected == 1){%>
+                                                                <div>
+                                                                    <h5 class="d-flex d-xl-flex justify-content-center align-items-center justify-content-xl-center align-items-xl-center" style="background-color: rgb(211, 41, 18);padding: .5em;color: white;">
+                                                                        Your Item has been rejected
+                                                                    </h5>
+                                                                    <div>
+                                                                        <p>Please again order the product with correct order details(<b>Your Phone Number should be Active for verification</b>)</p>
+                                                                    </div>
+                                                                </div>
+                                                                <%} else if(currentUser && valueToCallTheArrayElement.product[0].author.username == currentUser.username && valueToCallTheArrayElement.isaccepted == 1){%>
+                                                                    <form action="/deliverystatusisoutofdelivery" , method="POST">
+                                                                        <input type="hidden" value="<%=valueToCallTheArrayElement._id%>" name="id">
+                                                                        <input class="btn" type="submit" value="Out of Delivery" style="color: white;background-color: rgb(255, 136, 0);">
+                                                                    </form>
+                                                                    <%}else{%>
+                                                                        <h5 style="background-color: rgb(233, 96, 17);padding: .5em;color: white;">
+                                                                            In Process
+                                                                        </h5>
+                                                                        <%}%>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <%  }  %>
+                                <%  })  %>
+
+                </div>
+            </div>
+        </section>
+
+    </div>
+    <%- include('../partials/footer'); %>
