@@ -22,7 +22,7 @@ router.get("/register", function(req, res) {
 //handle sign up logic
 router.post("/register", function(req, res) {
     var newUser = new User({ username: req.body.username });
-    User.register(newUser, req.body.password, function(err, user) {
+    User.register(newUser, req.body.password,req.body.email function(err, user) {
         if (err) {
             console.log(err);
             return res.render("register");
@@ -60,6 +60,7 @@ function isLoggedIn(req, res, next) {
         return next();
     } else {
         res.redirect("/login")
+        console.log("user")
     }
 }
 
@@ -93,7 +94,7 @@ router.get("/verification/:id/confirmation", function(req, res) {
 
 //post confirmation
 router.put("/verification/:id/", function(req, res) {
-    User.findByIdAndUpdate(req.params.id, req.body.updates, function(err, updated) {
+    User.findByIdAndUpdate(req.params.id, req.body.updates,req.body.old function(err, updated) {
         if (err) {
             console.log(err);
         } else {
@@ -102,7 +103,5 @@ router.put("/verification/:id/", function(req, res) {
         }
     })
 })
-
-
 
 module.exports = router;
